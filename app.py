@@ -20,6 +20,11 @@ df_1 = df.copy()
 def remover_acentos(texto):
     return unicodedata.normalize('NFKD', texto).encode('ASCII', 'ignore').decode()
 
+def remov_acento(texto2):
+    """Elimina a acentuação dos caracteres em um texto."""
+    return ''.join(char for char in unicodedata.normalize('NFD', texto2) if unicodedata.category(char) != 'Mn')
+
+
 # Eliminando colunas vazias
 df_1 = df_1.dropna(subset=['Nº RM'])
 # SUbstituindo Valores NAN
@@ -108,15 +113,17 @@ def main():
     # Pede ao usuário para inserir a palavra-chave
     palavra_chave = st.text_input('Digite a palavra-chave e tecle "ENTER":')
     palavra_chave = palavra_chave.upper().strip()
-    st.caption('Obs.: A palavra-chave deve ser preenchida ignorando acentuação, ex. "divinização" deverá ser escrito como "divinizacao"')
+    filtered = remov_acento(palavra_chave)
+
+    #st.caption('Obs.: A palavra-chave deve ser preenchida ignorando acentuação, ex. "divinização" deverá ser escrito como "divinizacao"')
     # Pede ao usuário para escolher a coluna em que deseja pesquisar
     
     coluna_escolhida = st.selectbox('Escolha em qual seção da revista deseja pesquisar:', data.columns)
 
     # Filtra o dataframe com base na palavra-chave e na coluna escolhida
     result_df = ''
-    if palavra_chave and coluna_escolhida:
-        resultado = data[data[coluna_escolhida].str.contains(palavra_chave)]
+    if filtered and coluna_escolhida:
+        resultado = data[data[coluna_escolhida].str.contains(filtered)]
         result_df = resultado[['Nº RM', 'MÊS', 'ANO', coluna_escolhida]]
 
     else:
