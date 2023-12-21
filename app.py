@@ -11,7 +11,7 @@ from PIL import Image
 #Read file
 df = pd.read_excel('REVISTA MAHIKARI - KAWASSAKI HOSA.xlsx')
 
-df = df.sort_values(by=['ANO', 'Nº RM'], ascending=[False, True])
+df = df.sort_values(by=['ANO', 'Nº RM'], ascending=[True, False])
 
 #ETL de dados e subscrição do arquivo.
 df_1 = df.copy()
