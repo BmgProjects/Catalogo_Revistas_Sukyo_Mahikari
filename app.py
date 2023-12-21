@@ -11,7 +11,7 @@ from PIL import Image
 #Read file
 df = pd.read_excel('REVISTA MAHIKARI - KAWASSAKI HOSA.xlsx')
 
-df = df.sort_values(by=['ANO', 'Nº RM'], ascending=[True, False])
+df = df.sort_values(by=['ANO', 'Nº RM'], ascending=[False, False])
 
 #ETL de dados e subscrição do arquivo.
 df_1 = df.copy()
@@ -106,7 +106,7 @@ def main():
     st.subheader('Busca por palavra-chave')
 
     # Pede ao usuário para inserir a palavra-chave
-    palavra_chave = str(st.text_input('Digite a palavra-chave e tecle "ENTER":'))
+    palavra_chave = st.text_input('Digite a palavra-chave e tecle "ENTER":')
     palavra_chave = palavra_chave.upper().strip()
     st.caption('Obs.: A palavra-chave deve ser preenchida ignorando acentuação, ex. "divinização" deverá ser escrito como "divinizacao"')
     # Pede ao usuário para escolher a coluna em que deseja pesquisar
