@@ -106,7 +106,7 @@ def main():
     st.subheader('Busca por palavra-chave')
 
     # Pede ao usuário para inserir a palavra-chave
-    palavra_chave = st.text_input('Digite a palavra-chave e tecle "ENTER":')
+    palavra_chave = str(st.text_input('Digite a palavra-chave e tecle "ENTER":'))
     palavra_chave = palavra_chave.upper().strip()
     st.caption('Obs.: A palavra-chave deve ser preenchida ignorando acentuação, ex. "divinização" deverá ser escrito como "divinizacao"')
     # Pede ao usuário para escolher a coluna em que deseja pesquisar
